@@ -1,29 +1,42 @@
-# Alumni D1 Android
+# Alumni D1 — Mobile App + GitHub APK Build
 
-Aplikasi Android ringan untuk membuka Web App Alumni D1 yang terintegrasi dengan Google Sheets / Apps Script.
+Versi ini disiapkan untuk **Alumni D1** dengan dua bagian:
 
-## URL Web App
+- `apps-script/` — tampilan Dashboard Mobile-first yang tetap memakai backend Google Apps Script dan Google Sheets.
+- Android project — aplikasi APK ringan yang membuka Web App Alumni D1.
 
-URL sudah ditanam di `MainActivity.kt`:
+## 1. Terapkan tampilan mobile
+
+Di project Google Apps Script Alumni D1 yang sekarang, ganti `Index.html` dengan:
+
+`apps-script/Index.html`
+
+Gunakan `apps-script/Kode.gs` sebagai referensi backend yang sesuai dengan baseline saat ini, lalu **Deploy > Manage deployments > Edit > New version > Deploy**.
+
+> Jangan mengubah ID spreadsheet, mapping D1, atau fungsi backend hanya untuk perubahan tampilan.
+
+## 2. Build APK lewat GitHub
+
+Upload seluruh isi repository ini ke GitHub, branch `main`.
+
+Buka:
+
+`Actions → Build Alumni D1 APK → Run workflow`
+
+Workflow akan menghasilkan artifact:
+
+`AlumniD1-debug-apk`
+
+Di dalam artifact terdapat `app-debug.apk`.
+
+## 3. URL Web App
+
+APK sudah diarahkan ke Web App Alumni D1:
 
 `https://script.google.com/macros/s/AKfycbzc59_MuGVdiqhhBgFGYDZuR8sbDdYbZ2M5EknL4sDmEOd7jo0jdzY_dWfXJnC2juhC/exec`
 
-## Build APK tanpa Android Studio
+## Desain
 
-Project ini sudah dilengkapi GitHub Actions.
+Tampilan mobile memakai prinsip mobile-first: header ringkas, kartu statistik, pencarian yang mudah disentuh, detail alumni berbentuk kartu, navigasi bawah, filter compact, tabel yang tetap dapat digeser horizontal, dan safe-area untuk perangkat modern.
 
-1. Upload seluruh isi project ke repository GitHub.
-2. Pastikan branch utama bernama `main`.
-3. Buka tab **Actions**.
-4. Pilih workflow **Build Alumni D1 APK**.
-5. Klik **Run workflow**.
-6. Setelah selesai, buka hasil workflow dan bagian **Artifacts**.
-7. Download `AlumniD1-debug-apk.zip`, extract, lalu ambil `app-debug.apk`.
-
-Workflow juga otomatis berjalan setiap kali ada push ke branch `main`.
-
-## Arsitektur
-
-Android App → WebView → Apps Script Web App → Google Sheets
-
-Spreadsheet Master D1 tetap menjadi sumber data. APK ini hanya menjadi aplikasi pembuka Web App.
+Ikon aplikasi menggunakan ikon custom Alumni D1.
